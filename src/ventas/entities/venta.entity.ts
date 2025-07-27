@@ -23,6 +23,9 @@ export class Venta {
   @Column('decimal', { precision: 10, scale: 2 })
   total: number;
 
+  @Column({ default: 'COMPLETADA' })
+  estado: string;
+
   @OneToMany(() => DetalleVenta, (detalle) => detalle.venta, {
     cascade: true,
     eager: true,

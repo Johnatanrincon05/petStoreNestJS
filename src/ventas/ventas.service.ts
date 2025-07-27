@@ -57,12 +57,5 @@ export class VentasService {
   findOne(id: number) {
     return `This action returns a #${id} venta`;
   }
-
-  update(id: number, updateVentaDto: UpdateVentaDto) {
-    return `This action updates a #${id} venta`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} venta`;
-  }
+  
 }
