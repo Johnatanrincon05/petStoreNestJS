@@ -57,5 +57,9 @@ export class VentasService {
   findOne(id: number) {
     return this.ventasRepository.findOneBy({ id });
   }
+
+  findAllByUserId(id: number) {
+    return this.ventasRepository.find({ where: { cliente: { id } } });
+  }
   
 }

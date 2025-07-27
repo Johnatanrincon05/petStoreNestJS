@@ -21,4 +21,10 @@ export class VentasController {
   findOne(@Param('id') id: string) {
     return this.ventasService.findOne(+id);
   }
+
+  @Get('cliente/:id')
+  findOneByUser(@Param('id') id: string) {
+    return this.ventasService.findAllByUserId(+id);
+  }
+  
 }

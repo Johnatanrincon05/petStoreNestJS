@@ -7,18 +7,26 @@ import { Product } from './products/entities/product.entity';
 import { VentasModule } from './ventas/ventas.module';
 import { Venta } from './ventas/entities/venta.entity';
 import { DetalleVenta } from './ventas/entities/detalle-venta.entity';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 
 @Module({
   imports: [
-    TypeOrmModule.forRoot({
-      type: 'mysql',
-      host: '127.0.0.1',
-      port: 3306,
-      username: 'root',
-      password: '',
-      database: 'petstore',
-      entities: [User, Product, Venta, DetalleVenta],
-      synchronize: true,
+    ConfigModule.forRoot({
+      isGlobal: true,
+    }),
+    TypeOrmModule.forRootAsync({
+      imports: [ConfigModule],
+      inject: [ConfigService],
+      useFactory: (config: ConfigService) => ({
+        type: 'mysql',
+        host: config.get('DB_HOST'),
+        port: config.get('DB_PORT'),
+        username: config.get('DB_USER'),
+        password: config.get('DB_PASSWORD'),
+        database: config.get('DB_NAME'),
+        entities: [User, Product, Venta, DetalleVenta],
+        synchronize: true,
+      }),
     }),
     UsersModule,
     ProductsModule,
