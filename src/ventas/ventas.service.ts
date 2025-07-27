@@ -51,11 +51,11 @@ export class VentasService {
   }
 
   findAll() {
-    return `This action returns all ventas`;
+    return this.ventasRepository.find();
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} venta`;
+    return this.ventasRepository.findOneBy({ id });
   }
   
 }
